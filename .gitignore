@@ -50,3 +50,17 @@
 
 # Embedded web-server pid file
 /.web-server-pid
+
+# .env
+.env
+.env.local
+*.local
+*.local.*
+
+# Temporary files
+*.tmp
+*.tmp.*
+*.temp
+*.temp.*
+/var/tmp/*
+!var/tmp/.gitkeep

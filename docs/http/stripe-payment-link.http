@@ -1,0 +1,45 @@
+### Create a Product
+# @name create_product
+POST https://api.stripe.com/v1/products
+Content-Type: application/x-www-form-urlencoded
+Authorization: Bearer {{$dotenv STRIPE_SECRET_KEY}}
+
+name=Otaku Integration Test Product
+
+### Create a Price
+# @name create_price
+POST https://api.stripe.com/v1/prices
+Content-Type: application/x-www-form-urlencoded
+Authorization: Bearer {{$dotenv STRIPE_SECRET_KEY}}
+
+unit_amount=100000
+&currency=brl
+&product={{create_product.response.body.id}}
+&metadata[order]={"id":"ord_123456"}
+
+### Create a Payment Link
+POST https://api.stripe.com/v1/payment_links
+Content-Type: application/x-www-form-urlencoded
+Authorization: Bearer {{$dotenv STRIPE_SECRET_KEY}}
+
+line_items[0][price]={{create_price.response.body.id}}
+&line_items[0][quantity]=1
+
+### List Prices
+GET https://api.stripe.com/v1/prices
+Authorization: Bearer {{$dotenv STRIPE_SECRET_KEY}}
+
+### Alter a Price
+POST https://api.stripe.com/v1/prices/{{create_price.response.body.id}}
+Content-Type: application/x-www-form-urlencoded
+Authorization: Bearer {{$dotenv STRIPE_SECRET_KEY}}
+
+unit_amount=100
+&metadata[order][id]=ord_123456
+&metadata[customer][id]=cus_123456
+&metadata[customer][name]=John Doe
+&metadata[customer][email]=john.doe@example.com
+
+### List Payment Links
+GET https://api.stripe.com/v1/payment_links
+Authorization: Bearer {{$dotenv STRIPE_SECRET_KEY}}

@@ -1,0 +1,9 @@
+{
+    "name": "otaku/otaku",
+    "description": "Otaku Project",
+    "author": "Esdras Schonevald <esdras.schonevald@gmail.com>",
+    "require": {
+        "guzzlehttp/guzzle": "^7.10",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
